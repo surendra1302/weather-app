@@ -22,3 +22,9 @@ jobs:
 
       - name: Stop and remove services
         run: docker-compose down
+        
+      - name: Fix file permissions (post)
+        if: always()
+        run: |
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/weather-app
+          sudo chmod -R u+w /home/ubuntu/actions-runner/_work/weather-app
