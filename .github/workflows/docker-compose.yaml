@@ -1,0 +1,24 @@
+name: Docker Compose CI
+
+on:
+  push:
+    branches:
+      - feature-1
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start services using Docker Compose
+        run: docker-compose up -d
+
+      - name: Wait for services to be ready
+        run: sleep 10  
+
+      - name: Stop and remove services
+        run: docker-compose down
